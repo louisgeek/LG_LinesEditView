@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context="com.louisgeek.louismultilineedittext.MainActivity">
 
+    <!--  默认 app:maxCount="240"   默认 app:IgnoreCnOrEn="true"-->
     <com.louisgeek.multiedittextviewlib.MultiEditInputView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
