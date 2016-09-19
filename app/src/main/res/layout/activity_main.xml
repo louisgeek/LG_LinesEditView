@@ -9,6 +9,7 @@
 
     <!--  默认 app:maxCount="240"   默认 app:IgnoreCnOrEn="true"-->
     <com.louisgeek.multiedittextviewlib.MultiEditInputView
+        android:id="@+id/id_meiv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"

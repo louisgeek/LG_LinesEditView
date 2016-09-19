@@ -3,5 +3,7 @@
     <declare-styleable name="MultiEditInputView">
         <attr name="maxCount" format="integer"></attr>
         <attr name="IgnoreCnOrEn" format="boolean"></attr>
+        <attr name="hintText" format="string"></attr>
+        <attr name="contentText" format="string"></attr>
     </declare-styleable>
 </resources>

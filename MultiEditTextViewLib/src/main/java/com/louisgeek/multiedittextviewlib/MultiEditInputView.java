@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * IGNORE_CN_OR_EN 为false的时候
+ * ignoreCnOrEn 为false的时候
  * 1个中文算1个
  * 2个英文算1个
  *
@@ -25,8 +25,11 @@ public class MultiEditInputView extends LinearLayout{
     private  EditText id_et_input;
     private  TextView id_tv_input;
     private static final int DEFAULT_MAX_COUNT = 240;
-    private boolean IGNORE_CN_OR_EN;
+
     private int MAX_COUNT;
+    private String hintText;
+    private boolean ignoreCnOrEn;
+    private String contentText;
     public MultiEditInputView(Context context) {
         this(context,null);
     }
@@ -42,7 +45,9 @@ public class MultiEditInputView extends LinearLayout{
         TypedArray typedArray = context.obtainStyledAttributes(attrs,
                 R.styleable.MultiEditInputView);
         MAX_COUNT=typedArray.getInteger(R.styleable.MultiEditInputView_maxCount,DEFAULT_MAX_COUNT);
-        IGNORE_CN_OR_EN=typedArray.getBoolean(R.styleable.MultiEditInputView_IgnoreCnOrEn,true);
+        ignoreCnOrEn=typedArray.getBoolean(R.styleable.MultiEditInputView_IgnoreCnOrEn,true);
+        hintText=typedArray.getString(R.styleable.MultiEditInputView_hintText);
+        contentText=typedArray.getString(R.styleable.MultiEditInputView_contentText);
         init();
     }
 
@@ -52,7 +57,18 @@ public class MultiEditInputView extends LinearLayout{
         id_tv_input = (TextView) view.findViewById(R.id.id_tv_input);
 
         id_et_input.addTextChangedListener(mTextWatcher);
+        id_et_input.setHint(hintText);
+        id_et_input.setText(contentText);
 
+        /**
+         * 配合 id_tv_input xml的 android:focusable="true"
+         android:focusableInTouchMode="true"
+
+         在id_et_input设置完文本后
+
+         不给id_et_input 焦点
+         */
+        id_tv_input.requestFocus();
         //init
         configCount();
         id_et_input.setSelection(id_et_input.length()); // 将光标移动最后一个字符后面
@@ -83,7 +99,7 @@ public class MultiEditInputView extends LinearLayout{
             // 先去掉监听器，否则会出现栈溢出
             id_et_input.removeTextChangedListener(mTextWatcher);
 
-          if (IGNORE_CN_OR_EN){
+          if (ignoreCnOrEn){
               //当输入字符个数超过限制的大小时，进行截断操作
               while (calculateLengthIgnoreCnOrEn(editable.toString()) > MAX_COUNT) {
                   editable.delete(editStart - 1, editEnd);
@@ -131,7 +147,7 @@ public class MultiEditInputView extends LinearLayout{
     }
 
     private void configCount() {
-        if (IGNORE_CN_OR_EN){
+        if (ignoreCnOrEn){
             int nowCount=calculateLengthIgnoreCnOrEn(id_et_input.getText().toString());
             //
             id_tv_input.setText(String.valueOf((MAX_COUNT - nowCount))+"/"+MAX_COUNT);
@@ -143,4 +159,29 @@ public class MultiEditInputView extends LinearLayout{
 
     }
 
+    public void setContentText(String content) {
+        contentText=content;
+        if (id_et_input==null){
+            return;
+        }
+        id_et_input.setText(contentText);
+    }
+    public String getContentText() {
+        if (id_et_input!=null){
+            contentText=id_et_input.getText()==null?"":id_et_input.getText().toString();
+        }
+      return  contentText;
+    }
+
+    public void setHintText(String hintText) {
+        this.hintText = hintText;
+        id_et_input.setHint(hintText);
+    }
+
+    public String getHintText() {
+        if (id_et_input!=null) {
+            hintText = id_et_input.getHint() == null ? "" : id_et_input.getHint().toString();
+        }
+        return hintText;
+    }
 }
