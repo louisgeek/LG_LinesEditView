@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MultiEditInputView">
+        <attr name="maxCount" format="integer"></attr>
+        <attr name="IgnoreCnOrEn" format="boolean"></attr>
+    </declare-styleable>
+</resources>

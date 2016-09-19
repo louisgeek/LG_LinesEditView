@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LouisMultiLineEditText.iml" filepath="$PROJECT_DIR$/LouisMultiLineEditText.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MultiEditTextViewLib/MultiEditTextViewLib.iml" filepath="$PROJECT_DIR$/MultiEditTextViewLib/MultiEditTextViewLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
