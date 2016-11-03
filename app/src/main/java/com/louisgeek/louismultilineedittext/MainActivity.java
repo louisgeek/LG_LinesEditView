@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MultiEditInputView idmeiv = (MultiEditInputView) findViewById(R.id.id_meiv);
-        idmeiv.setHintText("1111");
-        idmeiv.setContentText("xxxxx");
+        idmeiv.setHintText("hintText");
+        idmeiv.setContentText("ContentText");
 
         Log.i(TAG, "onCreate: getHintText"+idmeiv.getHintText());
         Log.i(TAG, "onCreate: getContentText"+idmeiv.getContentText());
