@@ -1,1 +1,1 @@
-include ':app', ':MultiEditTextViewLib'
+include ':app', ':library'
