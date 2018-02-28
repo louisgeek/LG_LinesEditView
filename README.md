@@ -1,5 +1,5 @@
-# LouisMultiLineEditText
-Android EditText多行文本输入  字数统计  限制数量Demo
+# ClassicLinesEditView
+多行文本输入框 带计数  限制文字数量
 
 ![image](https://raw.githubusercontent.com/louisgeek/ClassicLinesEditView/master/screenshots/pic0.png)
 
