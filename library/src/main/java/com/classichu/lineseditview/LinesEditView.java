@@ -182,11 +182,11 @@ public class LinesEditView extends LinearLayout {
         if (ignoreCnOrEn) {
             int nowCount = calculateLengthIgnoreCnOrEn(id_et_input.getText().toString());
             //
-            id_tv_input.setText(String.valueOf((MAX_COUNT - nowCount)) + "/" + MAX_COUNT);
+            id_tv_input.setText(String.valueOf(nowCount) + "/" + MAX_COUNT);
         } else {
             long nowCount = calculateLength(id_et_input.getText().toString());
             //
-            id_tv_input.setText(String.valueOf((MAX_COUNT - nowCount)) + "/" + MAX_COUNT);
+            id_tv_input.setText(String.valueOf(nowCount) + "/" + MAX_COUNT);
         }
 
     }
