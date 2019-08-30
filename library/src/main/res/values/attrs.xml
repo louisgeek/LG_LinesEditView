@@ -3,6 +3,7 @@
     <declare-styleable name="LinesEditView">
             <attr name="classic_maxCount" format="integer"/>
             <attr name="classic_ignoreCnOrEn" format="boolean"/>
+        <attr name="classic_showPositive" format="boolean" />
             <attr name="classic_hintText" format="string|reference"/>
             <attr name="classic_hintTextColor" format="color|reference"/>
             <attr name="classic_contentText" format="string|reference"/>

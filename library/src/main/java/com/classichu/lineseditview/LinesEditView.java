@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -31,10 +32,26 @@ public class LinesEditView extends LinearLayout {
     private String hintText;
     private int hintTextColor;
     private boolean ignoreCnOrEn;
+    private boolean showPositive;
     private String contentText;
     private int contentTextSize;
     private int contentTextColor;
     private float contentViewHeight;
+
+    private boolean isInputAble = true;
+
+    public void setInputAble(boolean inputAble) {
+        isInputAble = inputAble;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if (isInputAble) {
+            return super.onInterceptTouchEvent(ev);
+        }
+        return true;
+    }
+
 
     public LinesEditView(Context context) {
         this(context, null);
@@ -52,6 +69,7 @@ public class LinesEditView extends LinearLayout {
                 R.styleable.LinesEditView);
         MAX_COUNT = typedArray.getInteger(R.styleable.LinesEditView_classic_maxCount, 240);
         ignoreCnOrEn = typedArray.getBoolean(R.styleable.LinesEditView_classic_ignoreCnOrEn, true);
+        showPositive = typedArray.getBoolean(R.styleable.LinesEditView_classic_showPositive, true);
         hintText = typedArray.getString(R.styleable.LinesEditView_classic_hintText);
         hintTextColor = typedArray.getColor(R.styleable.LinesEditView_classic_hintTextColor, Color.parseColor("#42000000"));
         contentText = typedArray.getString(R.styleable.LinesEditView_classic_contentText);
@@ -179,13 +197,17 @@ public class LinesEditView extends LinearLayout {
     }
 
     private void configCount() {
+        long nowCount;
         if (ignoreCnOrEn) {
-            int nowCount = calculateLengthIgnoreCnOrEn(id_et_input.getText().toString());
-            //
-            id_tv_input.setText(String.valueOf((MAX_COUNT - nowCount)) + "/" + MAX_COUNT);
+            nowCount = calculateLengthIgnoreCnOrEn(id_et_input.getText().toString());
         } else {
-            long nowCount = calculateLength(id_et_input.getText().toString());
-            //
+            nowCount = calculateLength(id_et_input.getText().toString());
+        }
+        if (showPositive) {
+            //正数显示 【当前输入数/总数】
+            id_tv_input.setText(String.valueOf(nowCount) + "/" + MAX_COUNT);
+        } else {
+            //倒数显示 【剩余输入数/总数】
             id_tv_input.setText(String.valueOf((MAX_COUNT - nowCount)) + "/" + MAX_COUNT);
         }
 
